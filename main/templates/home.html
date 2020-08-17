@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load static %} 
+
+{% block title %}드리머리 - 헤어 서비스 O2O{% endblock %}
+{% block link %}{% static 'css/home.css' %}{% endblock %}
+
+<!-- Main Content -->
+{% block content %}
+<section class="jumbotron text-center">
+    <div class="container">
+        <h1>드리머리</h1><br>
+        <p class="lead text-muted">열정 있는 디자이너에게 받는<br>합리적인 헤어 서비스, 드리머리</p>
+        <p>
+            <a href="{% url 'introduce' %}" class="btn btn-outline-danger">드리머리 알아 보기</a>
+        </p>
+    </div>
+</section>
+
+<div class="album py-5 bg-light">
+    <div class="container">
+        <div class="card-columns">
+            {% for designer in designers %}
+            <div class="card mb-4 shadow-sm">
+                <!-- Image -->
+                {% if designer.image %}
+                <img src="{{ designer.image.url }}" class="card-img-top" alt="Designer_Image">
+                {% else %}
+                <svg class="bd-placeholder-img card-img-top" width="100%" height="225"
+                    xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img"
+                    aria-label="Placeholder: Thumbnail">
+                    <title>Dreamary</title>
+                    <rect width="100%" height="100%" fill="#55595c" /><text x="50%" y="50%" fill="#eceeef"
+                        dy=".3em">Profile</text>
+                </svg>
+                {% endif %}
+                <div class="card-body">
+                    <h4 class="card-title">{{ designer.name }}</h4>
+                    <h6 class="card-text">{{ designer.address }}</h6>
+                    <hr>
+                    <p class="card-text">{{ designer.description }}</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="btn-group">
+                            <a href="{% url 'detail' designer.id %}" class="btn btn-sm btn-outline-secondary">자세히
+                                알아보기</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

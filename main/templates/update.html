@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}프로필 수정하기{% endblock %}
+{% block link %}{% static 'css/update.css' %}{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="py-5 text-center">
+        <img class="d-block mx-auto mb-4" src="{% static 'images/Dreamary_Logo.png' %}" alt="" width="72" height="72">
+        <h2>나의 프로필 변경하기</h2>
+        <p class="lead">하단의 폼에 맞추어 수정하고 싶은 정보를 업데이트 해 주세요.<br>새로운 이미지를 등록하지 않을 경우, 기존의 이미지가 유지됩니다.</p>
+    </div>
+    <div class="order-md-1">
+        <hr class="mb-4">
+        <form action="{% url 'update' designer.id %}" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="inputFile">등록하시는 분을 대표할 수 있는 이미지를 등록해 주세요</label>
+                <div>{% if designer.image %}<p>등록된 이미지 : <a href="{{ designer.image.url }}">{{ designer.image.url }}</a>
+                    </p>{% endif %}</div>
+                <p>새로운 이미지 : <input type="file" class="form-control-file" id="inputFile" name="image"></p>
+            </div>
+
+            <div class="mb-3">
+                <label for="inputName">등록하시는 분의 이름을 적어 주세요</label>
+                <input type="text" class="form-control" id="inputName" name="name" value="{{ designer.name }}" required>
+                <small id="Name" class="form-text text-muted">50자 이내로 작성 바랍니다.</small>
+            </div>
+
+            <div class="mb-3">
+                <label for="inputAddress">등록하시는 분의 활동 지역을 적어 주세요</label>
+                <input type="text" class="form-control" id="inputAddress" name="address" value="{{ designer.address }}" required>
+                <small id="Name" class="form-text text-muted">예시) 서울특별시 강남구, 경기도 성남시 등</small>
+            </div>
+    </div>
+
+    <div class="mb-3">
+        <label for="inputDescription">당신을 소개해 주세요 </label>
+        <textarea class="form-control" id="inputDescription" name="description" cols="40" rows="10" required>{{ designer.description }}</textarea>
+        <small id="Name" class="form-text text-muted">고객님들에게 전하고 싶은 말을 적어 주세요.</small>
+    </div>
+    <hr class="mb-4">
+    <button class="btn btn-secondary btn-lg btn-block" type="submit">수정 완료하기</button>
+    </form>
+</div>
+{% endblock %}

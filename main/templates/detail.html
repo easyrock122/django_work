@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}디자이너 세부 프로필{% endblock %}
+{% block link %}{% static 'css/detail.css' %}{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div id="designer" class="row featurette">
+        <div class="col-md-6">
+            <h2 class="featurette-heading">{{ designer.name }}<span id="namedeco" class="text-muted">헤어 디자이너</span></h2>
+            <h5 class="featurette-heading">"{{ designer.address }}" 에서 활동 중입니다.</h5>
+            <p class="lead">{{ designer.description }}</p>
+            <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                    <a href="{% url 'update' designer.id %}" class="btn btn-sm btn-outline-secondary">정보 수정</a>
+                    <a href="{% url 'delete' designer.id %}" class="btn btn-sm btn-outline-danger">정보 삭제</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <img src="{{ designer.image.url }}" width="150%" alt="Designer_Profile_Image">
+        </div>
+    </div>
+</div>
+{% endblock %}

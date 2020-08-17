@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}디자이너 등록하기{% endblock %}
+{% block link %}{% static 'css/new.css' %}{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="py-5 text-center">
+        <img class="d-block mx-auto mb-4" src="{% static 'images/Dreamary_Logo.png' %}" alt="" width="72" height="72">
+        <h2>드리머리와 함께 하기</h2>
+        <p class="lead">하단의 폼에 맞추어 등록에 필요한 정보를 작성해 주세요.<br>몇 분의 등록 작업으로 당신도 드리머리와 함께 할 수 있습니다.</p>
+    </div>
+    <div class="order-md-1">
+        <hr class="mb-4">
+
+        <!-- Create Form -->
+        <form action="{% url 'create' %}" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="inputFile">등록하시는 분을 대표할 수 있는 이미지를 등록해 주세요</label>
+                <input type="file" class="form-control-file" id="inputFile" name="image" value="" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="inputName">등록하시는 분의 이름을 적어 주세요</label>
+                <input type="text" class="form-control" id="inputName" name="name" required>
+                <small id="Name" class="form-text text-muted">50자 이내로 작성 바랍니다.</small>
+            </div>
+
+            <div class="mb-3">
+                <label for="inputAddress">등록하시는 분의 활동 지역을 적어 주세요</label>
+                <input type="text" class="form-control" id="inputAddress" name="address" required>
+                <small id="Name" class="form-text text-muted">예시) 서울특별시 강남구, 경기도 성남시 등</small>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="inputDescription">당신을 소개해 주세요 </label>
+                <textarea class="form-control" id="inputDescription" name="description" cols="40" rows="10" required></textarea>
+                <small id="Name" class="form-text text-muted">고객님들에게 전하고 싶은 말을 적어 주세요.</small>
+            </div>
+            <hr class="mb-4">
+            <button class="btn btn-secondary btn-lg btn-block" type="submit">등록 완료하기</button>
+        </form>
+
+    </div>
+</div>
+{% endblock %}
